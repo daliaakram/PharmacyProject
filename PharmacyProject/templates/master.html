@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>This is Base</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="contanier">
+        <ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href='{% url 'Pharma:medicine' %}'>Medicine</a></li>
+          <li><a class="navbar-link" href='{% url 'Pharma:transactions' %}'>Transactions</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="contanier">
+      {% block body_block %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
