@@ -1,0 +1,32 @@
+{% extends 'master.html' %}
+{% load static %}
+    {% block body_block %}
+    <h1>This is Transactions Page!</h1>
+    {% if transactions_records %}
+      <table>
+        <thead>
+          <th>Medicine Trade Name</th>
+          <th>Selling QNT</th>
+          <th>Selling Price</th>
+          <th>Selling Date</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </thead>
+        {% for trans in transactions_records %}
+          <tr>
+            <td>{{trans.med_name}}</td>
+            <td>{{trans.sell_qnt}}</td>
+            <td>{{trans.sell_price}}</td>
+            <td>{{trans.sell_date}}</td>
+            <!-- <td><a href='{% url 'Pharma:tupdate' trans.id %}'>Update</a></td>
+            <td><a href='{% url 'Pharma:tdelete' trans.id %}'>Delete</a></td> -->
+            <td><button type="submit" class="btn btn-success" onclick="location.href='{% url 'Pharma:tupdate' trans.id %}'" name='mybtn2'>Update</button></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deletemodal">Delete</button></td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+    <p>NOT FOUND</p>
+    {% endif %}
+    <button type="submit" class="btn btn-success" onclick="location.href='{% url 'Pharma:createtrans' %}'" name='mybtn2'>Create New Transaction</button>
+    {% endblock %}

@@ -1,22 +1,75 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>This is Base</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="contanier">
-        <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href='{% url 'Pharma:medicine' %}'>Medicine</a></li>
-          <li><a class="navbar-link" href='{% url 'Pharma:transactions' %}'>Transactions</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="contanier">
+      <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="nav navbar-nav collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link active" href='{% url 'Pharma:medicine' %}'>Medicine</a>
+            <a class="nav-item nav-link active" href='{% url 'Pharma:transactions' %}'>Transactions</a>
+            <span class="navbar-text navbar-nav text-right">Welcome {{your_name}}</span>
+          </div>
+        </div>
+      </nav> -->
+      <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+          <!-- <a class="navbar-brand" href='{% url 'Pharma:getname' %}'>Home</a> -->
+          <a class="navbar-brand" href='{% url 'Pharma:medicine' %}'>Medicine</a>
+          <a class="navbar-brand" href='{% url 'Pharma:transactions' %}'>Transactions</a>
+          <div class="collapse navbar-collapse flex-grow-0" style="direction:rtl;" id="navbarSupportedContent">
+              <ul class="navbar-nav text-right">
+                  <li class="nav-item active">
+                      <span class="nav-link" href="#">Welcome {{your_name}}</span>
+                  </li>
+              </ul>
+          </div>
+      </nav>
       {% block body_block %}
+        <h1>This is Home page!</h1>
+        <img src="{% static 'images/pharmacy.jpg'%}" alt="UH OH!">
+        <img src="{% static 'images/analysiss.jpg'%}" alt="UH OH!">
       {% endblock %}
-    </div>
+
+      <!-- Modal -->
+      <div class="modal" tabindex="-1" role="dialog" id="deletemodal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete Medicine</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="post">
+              {% csrf_token %}
+              <div class="modal-body">
+                <h1>Are you sure you want to delete {{insert_med.trade_name}}?</h1>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="submit" class="btn btn-secondary">Yes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+      <script>
+        $(document).ready(function() {
+          $('.deletebtn').on('click', function() {
+            $('#deletemodal').modal('show');
+          });
+        });
+      </script>
   </body>
+
 </html>

@@ -4,14 +4,14 @@ from django.db import models
 
 
 class Medicine(models.Model):
-    scientific_name = models.TextField(max_length=264)
-    trade_name = models.TextField(max_length=264)
-    alternate1 = models.TextField(max_length=264)
-    alternate2 = models.TextField(max_length=264)
-    qnt = models.PositiveIntegerField()
-    item_price = models.PositiveIntegerField()
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    scientific_name = models.CharField(max_length=264,null=True,)
+    trade_name = models.CharField(max_length=264, null=True,)
+    alternate1 = models.CharField(max_length=264, null=True,)
+    alternate2 = models.CharField(max_length=264, null=True,)
+    qnt = models.PositiveIntegerField(null=True,)
+    item_price = models.PositiveIntegerField(null=True,)
+    start_date = models.DateTimeField(null=True,)
+    end_date = models.DateTimeField(null=True,)
 
     def __str__(self):
         return self.trade_name
@@ -19,9 +19,9 @@ class Medicine(models.Model):
 
 class Transactions(models.Model):
     med_name = models.ForeignKey('Medicine', on_delete = models.CASCADE)
-    sell_qnt = models.PositiveIntegerField()
-    sell_price = models.PositiveIntegerField()
-    sell_date = models.DateTimeField()
+    sell_qnt = models.PositiveIntegerField(null=True,)
+    sell_price = models.PositiveIntegerField(null=True,)
+    sell_date = models.DateTimeField(null=True,)
 
     def __str__(self):
         return self.med_name.trade_name

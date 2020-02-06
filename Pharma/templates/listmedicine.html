@@ -1,0 +1,29 @@
+{% extends 'master.html' %}
+{% load static %}
+    {% block body_block %}
+    <h1>This is Medicine Page!</h1>
+
+    {% if medicine_records %}
+      <table>
+        <thead>
+          <th>Scientific Name</th>
+          <th>Trade Name</th>
+          <th>Create Date</th>
+          <th>UPDATE</th>
+          <th>DELETE</th>
+        </thead>
+        {% for med in medicine_records %}
+          <tr>
+            <td>{{med.scientific_name}}</td>
+            <td>{{med.trade_name}}</td>
+            <td>{{med.start_date}}</td>
+            <td><button type="submit" class="btn btn-success" onclick="location.href='{% url 'Pharma:update' med.id %}'" name='mybtn2'>Update</button></td>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deletemodal">Delete</button></td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+    <p>NOT FOUND</p>
+    {% endif %}
+    <button type="submit" class="btn btn-success" onclick="location.href='{% url 'Pharma:createmed' %}'" name='mybtn2'>Create New Medicine</button>
+    {% endblock %}
